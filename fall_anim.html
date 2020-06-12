@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    Fall Animation
+  </title>
+  
+  <style type="text/css">
+   @import url("https://fonts.googleapis.com/css?family=Lora:400,400i,700");
+   body {
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+		font-family: Lora, serif;
+   }
+   p {
+		font-weight: bold;
+		font-size: 2em;
+		white-space: pre;
+		margin: 0 8em;
+   }
+   .anim { 
+	   display: flex;
+	   flex-wrap: wrap;
+   }
+   .anim span { animation: fall .5s ease-in-out both; }
+   
+   @keyframes fall{
+  	   0% {transform: translateY(0); opacity: 0}
+  	   100% {transform: translateY(100%); opacity: 1}
+   }
+  </style>
+
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function(){
+		let nodes = document.querySelectorAll('.anim');
+		let idx = 0;
+		nodes.forEach((node)=>{
+			let words = node.textContent.split('');
+			node.textContent = '';
+			words.forEach(function(word){
+				let e = document.createElement('span');
+				e.textContent = word;
+				e.style.animationDelay = `${idx * 0.02}s`;
+				node.appendChild(e);
+				idx += 1;
+			});
+		})
+    })
+  </script>
+</head>
+
+<body>
+	<p class="anim">All you have to do is waiting some seconds...</p>
+	<p class="anim">It works!</p>
+</body>
+</html>
