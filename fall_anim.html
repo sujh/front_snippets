@@ -36,25 +36,27 @@
 
   <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function(){
-		let nodes = document.querySelectorAll('.anim');
-		let idx = 0;
-		nodes.forEach((node)=>{
-			let words = node.textContent.split('');
-			node.textContent = '';
-			words.forEach(function(word){
-				let e = document.createElement('span');
-				e.textContent = word;
-				e.style.animationDelay = `${idx * 0.02}s`;
-				node.appendChild(e);
-				idx += 1;
-			});
-		})
+  		let nodes = document.querySelectorAll('.anim');
+  		let idx = 0;
+  		nodes.forEach((node)=>{
+  			let words = node.textContent.replace(/^\s+|\s+$/g, '').split('');
+  			node.textContent = '';
+  			words.forEach(function(word){
+  				let e = document.createElement('span');
+  				e.textContent = word;
+  				e.style.animationDelay = `${idx * 0.02}s`;
+  				node.appendChild(e);
+  				idx += 1;
+  			});
+  		})
     })
   </script>
 </head>
 
 <body>
-	<p class="anim">All you have to do is waiting some seconds...</p>
+	<p class="anim">
+    All you have to do is waiting some seconds...
+  </p>
 	<p class="anim">It works!</p>
 </body>
 </html>
