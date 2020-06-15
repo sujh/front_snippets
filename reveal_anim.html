@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Reveal Animation</title>
+		<style>
+			@import url("https://fonts.googleapis.com/css?family=Raleway:400,400i,700");
+			body {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+				background-color: black;
+				margin: 0;
+			}
+			.reveal {
+				font-family: Raleway, sans-serif;
+				font-size: 2em;
+				color: #6ee1f5;
+				display: flex;
+				position: relative;
+				white-space: pre;
+			}
+			.reveal::before, .reveal::after {
+				content: '';
+				width: .1em;
+				opacity: 0;
+				background-color: white;
+				top: 0;
+				bottom: 0;
+				position: absolute;
+				transform: scale(0);
+			}
+			.reveal::before {
+				animation: slideLeft 2s cubic-bezier(.43,-1.03,.66,1.94) forwards;
+				left: 4em;
+			}
+			.reveal::after {
+				animation: slideRight 2s cubic-bezier(.43,-1.03,.66,1.94) forwards;
+				right: 4em;
+			}
+			.reveal span {
+				animation: reveal 2s cubic-bezier(.43,-1.03,.66,1.94) both;
+				opacity: 0;
+				transform: scale(0);
+			}
+			@keyframes reveal {
+				100% {
+					opacity: 1;
+					transform: scale(1);
+				}
+			}
+			@keyframes slideLeft{
+				to {
+					left: -6%;
+					transform: scale(0.9);
+					opacity: 1;
+				}
+			}
+			@keyframes slideRight{
+				to {
+					right: -6%;
+					transform: scale(0.9);
+					opacity: 1;
+				}
+			}
+		</style>
+		<script>
+			document.addEventListener('DOMContentLoaded', ()=>{
+				let container = document.querySelector('.reveal')
+				let txt = container.innerText.replace(/^\s+|\s+$/g, '')
+				container.innerText = ''
+				let radius = txt.length / 2
+				txt.split('').forEach((letter, idx) => {
+					let span = document.createElement('span')
+					span.textContent = letter
+					let delayTime = Math.abs(idx - radius) * 0.1 //Start animation from center
+					span.style.animationDelay = `${delayTime}s`
+					container.appendChild(span)
+				})
+
+			})
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			ALL YOU HAVE TO DO IS WAITING...
+		</div>
+	</body>
+</html>
